@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="style.css">
+		<title>Decodificador</title>
+	</head>
+	<body>
+		<header>
+			<img class="logo" src="logoa.png" alt="Logo da Alura">
+		</header>
+		<main>
+			<section>
+				<textarea class="input" cols="41" rows="4" placeholder="Digite seu texto."></textarea>
+				<div class="info">
+					<h6>⚠ Apenas minúsculos e sem acento.</h6>
+				</div>
+					<div class="botoes">
+						<button class="btn-encriptar" onclick="btnEncriptar()">Criptografar</button>
+						<button class="btn-descriptar" onclick="btnDescriptar()">Descriptografar</button>
+					</div>
+			</section>
+			<section>
+				<div class="resultoutput">
+					<textarea class="output" cols="20" rows="10"></textarea>
+					<button class="btn-copiar" onclick="btncopiar()">Copiar</button>
+				</div>
+				<div class="mensagem">
+					<img src="High quality products 1 1.svg">
+					<h3>Nenhuma mensagem encontrada</h3>
+					<p>Digite um texto que você deseja criptografar ou descriptografar.</p>
+				</div>
+			</section>
+			<section>
+				<a href="https://instagram.com/oli.cayo?igshid=ZmZhODViOGl" target="_blank" title="oli.cayo">
+				<img class="logoinsta" src="instagram.png" alt="Instagram"></a>
+				<a href="https://www.linkedin.com/in/caio-oliveira-santana-71190713a" target="_blank" title="Caio Oliveira Santana"><img class="logolinke" src="linkedin.png" alt="Linkedin"></a>
+			</section>
+			<script>
+				const textInput = document.querySelector(".input");
+				const textResult = document.querySelector(".output");
+				var container = document.querySelector(".mensagem");
+				var botao = document.querySelector(".btn-copiar");
+
+				container.style.display = 'block'
+				botao.style.display = 'none'
+
+				function btnEncriptar(){
+					const textEncriptado = encriptar(textInput.value);
+					textResult.value = textEncriptado;
+					textInput.value = "";
+					container.style.display = 'none'
+					botao.style.display = 'block'
+    }
+				function encriptar(stringencrip){
+					let  matrizCodigo = [["e", "enter"],["i", "imes"],["a","ai"],["o","ober"],["u", "ufat"]];
+					stringencrip = stringencrip.toLowerCase();
+					for (let i = 0; i < matrizCodigo.length; i++){
+						if (stringencrip.includes(matrizCodigo[i][0])){
+							stringencrip = stringencrip.replaceAll(matrizCodigo[i][0],matrizCodigo[i][1]);
+						}
+					}
+					return stringencrip;
+				}
+				function btnDescriptar(){
+					const textDescriptado = descriptar(textInput.value);
+					textResult.value = textDescriptado;
+					textInput.value = "";
+					container.style.display = 'none'
+					botao.style.display = 'block'
+				}
+
+				function descriptar(stringdescrip){
+					let  matrizCodigo = [["enter", "e"],["imes", "i"],["ai","a"],["ober","o"],["ufat", "u"]];
+					stringdescrip = stringdescrip.toLowerCase();
+					for (let i = 0; i < matrizCodigo.length; i++){
+						if (stringdescrip.includes(matrizCodigo[i][0])){
+							stringdescrip = stringdescrip.replaceAll(matrizCodigo[i][0],matrizCodigo[i][1]);
+						}
+					}
+					return stringdescrip;
+				}
+				function btncopiar(){
+					var textocopiado = document.querySelector(".output");
+					textocopiado.select();
+  					document.execCommand('copy');
+					}
+			</script>
+		</main>
+	</body>
+</html>
